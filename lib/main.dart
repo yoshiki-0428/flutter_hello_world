@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => FirstPage(),
         '/second': (context) => SecondPage(),
-        '/english_list': (context) => RandomWords()
+        '/english_list': (context) => RandomWords(),
+        '/list_view': (context) => ListWidget()
       },
     );
   }
@@ -22,7 +23,10 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('First Page')),
-      body: Center(
+      body: Container(
+        alignment: Alignment.topCenter,
+        color: Colors.greenAccent,
+        height: 100,
         child: RaisedButton(
             onPressed: () {
               Navigator.push(
@@ -44,13 +48,31 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('Second Page')),
-        body: Center(
-          child: RaisedButton(
+        body: ListView(children: <Widget>[
+          RaisedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/english_list');
               },
               child: Text('Go to English List Page')),
-        ));
+          RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/list_view');
+              },
+              child: Text('Go to List View')),
+        ]));
+  }
+}
+
+class ListWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Text>[
+        Text('aaa'),
+        Text('bbb'),
+        Text('ccc'),
+      ],
+    );
   }
 }
 
